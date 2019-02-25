@@ -1,0 +1,28 @@
+﻿@model List<string>
+<h2>Basic File Upload</h2>
+<form asp-controller="Upload" asp-action="Index" method="post" enctype="multipart/form-data">
+    <label for="file">Upload Assignment:</label>
+    <input type="file" name="file" id="file" />
+    <br /><br />
+    <input type="submit" value="Upload" />
+    <br /><br />
+    @ViewBag.Message
+    <br />
+</form>
+
+<br />
+<br />
+<h2>Document List</h2>
+<table>
+    <tr>
+        <th>File Name</th>
+        <th>Link</th>
+    </tr>
+    @for (var i = 0; i <= Model.Count - 1; i++)
+    {
+        <tr>
+            <td>@Model[i].ToString()</td>
+            <td>@Html.ActionLink("Download", "Download", new { FileName = Model[i].ToString() })</td>
+        </tr>
+    }
+</table>
